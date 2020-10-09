@@ -65,11 +65,11 @@ open class WCInteractor {
         self.bnb = WCBinanceInteractor()
         self.trust = WCTrustInteractor()
 
-        socket.onConnect = { [weak self] in self?.onConnect() }
-        socket.onDisconnect = { [weak self] error in self?.onDisconnect(error: error) }
-        socket.onText = { [weak self] text in self?.onReceiveMessage(text: text) }
-        socket.onPong = { _ in WCLog("<== pong") }
-        socket.onData = { data in WCLog("<== websocketDidReceiveData: \(data.toHexString())") }
+        //socket.onConnect = { [weak self] in self?.onConnect() }
+        //socket.onDisconnect = { [weak self] error in self?.onDisconnect(error: error) }
+        //socket.onText = { [weak self] text in self?.onReceiveMessage(text: text) }
+        //socket.onPong = { _ in WCLog("<== pong") }
+        //socket.onData = { data in WCLog("<== websocketDidReceiveData: \(data.toHexString())") }
     }
 
     deinit {
@@ -77,9 +77,9 @@ open class WCInteractor {
     }
 
     open func connect() -> Promise<Bool> {
-        if socket.isConnected {
-            return Promise.value(true)
-        }
+        //if socket.isConnected {
+        //    return Promise.value(true)
+        //}
         socket.connect()
         state = .connecting
         return Promise<Bool> { [weak self] seal in
@@ -89,6 +89,7 @@ open class WCInteractor {
 
     open func pause() {
         state = .paused
+        //socket.disconnect(forceTimeout: nil, closeCode: CloseCode.goingAway.rawValue)
         socket.disconnect(forceTimeout: nil, closeCode: CloseCode.goingAway.rawValue)
     }
 
