@@ -90,7 +90,7 @@ open class WCInteractor {
     open func pause() {
         state = .paused
         //socket.disconnect(forceTimeout: nil, closeCode: CloseCode.goingAway.rawValue)
-        socket.disconnect(forceTimeout: nil, closeCode: CloseCode.goingAway.rawValue)
+        socket.disconnect(closeCode: CloseCode.goingAway.rawValue)
     }
 
     open func resume() {
